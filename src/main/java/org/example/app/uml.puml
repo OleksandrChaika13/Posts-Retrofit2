@@ -1,0 +1,80 @@
+@startuml
+class org.example.app.view.AppView {
+~ Scanner scanner
++ String chooseOption()
+- {static} void getMenu()
++ void getOutput(String,String)
+}
+class org.example.app.model.PostModel {
++ Optional<Response<List<Post>>> fetchPosts()
++ Optional<Response<Post>> fetchPostById(int)
++ Optional<Response<List<Post>>> fetchFirstTenPosts()
+}
+class org.example.app.view.PostByIdView {
+~ Scanner scanner
++ String getData()
++ void getOutput(String)
+}
+class org.example.app.controller.PostByIdController {
+~ PostModel model
+~ PostByIdView view
++ void getPostById()
+- String readPostById(int)
+}
+class org.example.app.controller.PostsByLimitController {
+~ PostModel model
+~ PostsView view
++ void getTenPosts()
+- String readTenPosts()
+}
+class org.example.app.utils.AppStarter {
++ {static} void startApp()
+}
+class org.example.app.network.ApiClient {
++ ApiService getApiService()
+}
+class org.example.app.Main {
++ {static} void main(String[])
+}
+class org.example.app.model.AppModel {
++ void readPosts()
++ void readPostById()
++ void readTenPosts()
+}
+class org.example.app.controller.PostsController {
+~ PostModel model
+~ PostsView view
++ void getPosts()
+- String readPosts()
+}
+interface org.example.app.network.ApiService {
+~ Call<List<Post>> getUsers()
+~ Call<Post> getUserById(int)
+~ Call<List<Post>> getFirstTenPosts(int)
+}
+class org.example.app.controller.AppController {
+~ AppModel model
+~ AppView view
++ void runApp()
+- void filterChoice(int)
+}
+class org.example.app.view.PostsView {
++ void getOutput(String)
+}
+class org.example.app.entity.Post {
+- int userId
+- int id
+- String title
+- String body
++ int getUserId()
++ int getId()
++ String getTitle()
++ String getBody()
++ String toString()
+}
+class org.example.app.utils.Constants {
++ {static} String BASE_URL
++ {static} String APP_CLOSED_MSG
++ {static} String NO_DATA_MSG
+}
+@enduml
